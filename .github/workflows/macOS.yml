@@ -30,7 +30,7 @@ jobs:
 
       - name: Setup Vulkan 
         if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
-        run: run: |
-        curl -LS -o vulkansdk.dmg \
-          https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/mac/vulkansdk-macos-${{ env.VK_VERSION }}.dmg
-        ls
+        run: |
+          curl -LS -o vulkansdk.dmg \
+            https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/mac/vulkansdk-macos-${{ env.VK_VERSION }}.dmg
+          ls
