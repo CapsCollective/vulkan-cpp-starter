@@ -44,6 +44,7 @@ else
 	ifeq ($(UNAMEOS), Darwin)
 
 		vulkanLibDir := lib
+		vulkanLibPrefix := $(vulkanLibDir)
 		vulkanLib := vulkan.1
 		vulkanLink := -l $(vulkanLib) -l vulkan.$(VK_VERSION)
 
@@ -80,7 +81,7 @@ lib:
 	cd vendor/glfw $(THEN) $(CMAKE_CMD) $(THEN) "$(MAKE)" 
 	$(MKDIR) $(call platformpth, lib/$(platform))
 	$(call COPY,vendor/glfw/src,lib/$(platform),libglfw3.a)
-	$(call COPY,$(VULKAN_SDK)/$(vulkanLibDir),lib/$(platform),$(vulkanLib).$(LIB_EXT))
+	$(call COPY,$(VULKAN_SDK)/$(vulkanLibDir),lib/$(platform),$(vulkanLibPrefix)$(vulkanLib).$(LIB_EXT))
 	$(macOSVulkanLib)
 
 # Link the program and create the executable
