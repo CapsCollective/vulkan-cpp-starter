@@ -1,0 +1,36 @@
+name: masOS
+
+on:
+
+  env: 
+    VK_VERSION: "1.2.176.1"
+
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Cache Vulkan
+        id: cache-vulkan-sdk
+        uses: actions/cache@v1
+        with:
+          path: ~/VulkanSDK/${{ env.VK_VERSION }}
+          key: vulkan-sdk-${{ env.VK_VERSION }}
+
+      - name: Setup Vulkan 
+        if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
+        run: run: |
+        curl -LS -o vulkansdk.dmg \
+          https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/mac/vulkansdk-macos-${{ env.VK_VERSION }}.dmg
+        ls
