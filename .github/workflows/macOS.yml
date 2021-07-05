@@ -35,6 +35,6 @@ jobs:
           hdiutil attach ../vulkansdk.dmg
           echo "VOLUME"
           ls /Volumes
-          cd vulkansdk-macos-1.2.176.1
+          cd /Volumes/vulkansdk-macos-1.2.176.1
           echo "VULKAN SDK LS"
           ls
