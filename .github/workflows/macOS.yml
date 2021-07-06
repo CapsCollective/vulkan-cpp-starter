@@ -24,7 +24,7 @@ jobs:
         id: cache-vulkan-sdk
         uses: actions/cache@v1
         with:
-          path: ${{ env.VULKAN_SDK }}
+          path: ${{ env.INSTALL_LOCATION }}
           key: vulkan-sdk-${{ env.VK_VERSION }}
 
       - name: Setup Vulkan 
