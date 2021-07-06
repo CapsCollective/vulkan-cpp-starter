@@ -41,3 +41,4 @@ jobs:
           echo "EXPORTED"
           ls ${{ env.VULKAN_SDK }}
           ls ${{ env.VULKAN_SDK }}/vulkansdk-macos-1.2.135.0
+          ls ${{ env.VULKAN_SDK }}/vulkansdk-macos-1.2.135.0/macOS
