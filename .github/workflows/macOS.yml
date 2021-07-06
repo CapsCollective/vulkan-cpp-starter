@@ -15,7 +15,8 @@ jobs:
     runs-on: macos-latest
     env: 
       VK_VERSION: "1.2.135"
-      INSTALL_LOCATION: "$GITHUB_WORKSPACE/../vulkan_sdk/"
+      INSTALL_LOCATION: "$GITHUB_WORKSPACE/../vulkan_sdk"
+      VULKAN_SDK: "$INSTALL_LOCATION/vulkansdk-macos-1.2.135.0/macOS"
 
     steps:
       - uses: actions/checkout@v2
@@ -33,31 +34,16 @@ jobs:
           curl -LS -o ../vulkansdk.tar.gz \
             https://sdk.lunarg.com/sdk/download/1.2.135.0/mac/vulkansdk-macos-1.2.135.0.tar.gz
           mkdir -p "${{ env.INSTALL_LOCATION }}"
-          echo "CREATED"
           tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
-          echo "EXTRACTED"
-          export VK_VERSION=1.2.135.0
-          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
-          echo "EXPORTED"
-          ls ${{ env.INSTALL_LOCATION }}
-          ls ${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0
-          ls ${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
-          ls $VULKAN_SDK/lib
           
       - name: setup dependencies
-        run: | 
-          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
-          make setup
+        run: make setup
 
       - name: build project
-        run: | 
-          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
-          make bin/app
+        run: make bin/app
         
       - name: clean
         run: make clean
         
       - name: make bin/app CXX=g++
-        run: | 
-          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
-          make bin/app CXX=g++
+        run: make bin/app CXX=g++
