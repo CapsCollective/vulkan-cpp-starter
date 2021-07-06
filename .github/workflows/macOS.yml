@@ -14,7 +14,7 @@ jobs:
 
     runs-on: macos-latest
     env: 
-      VK_VERSION: "1.2.135.0"
+      VK_VERSION: "1.2.135"
       INSTALL_LOCATION: "$GITHUB_WORKSPACE/../vulkan_sdk/"
 
     steps:
