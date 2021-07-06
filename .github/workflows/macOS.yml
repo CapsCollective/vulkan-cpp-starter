@@ -1,4 +1,4 @@
-name: masOS
+name: macOS
 
 on:
 
@@ -26,7 +26,12 @@ jobs:
         with:
           path: ${{ env.INSTALL_LOCATION }}
           key: vulkan-sdk-${{ env.VK_VERSION }}
-
+          
+        # Set up the Vulkan SDK. 
+        # Unfortunately, LunarG has stopped bundling the SDK in zip files and instead requires that VK be manually installed. 
+        # This approach isn't entirely doable on the MacOS CICD, since the install requires manual steps. 
+        # With this is mind, this test is capped to Vulkan 1.2.135.0, and will not be able to test newer versions until this is 
+        # a better olutaion can be found.
       - name: Setup Vulkan 
         if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
         run: |
@@ -35,19 +40,23 @@ jobs:
           mkdir -p "${{ env.INSTALL_LOCATION }}"
           tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
           
+        # Setup dependencies
       - name: setup dependencies
         run: | 
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
           make setup
-
+          
+        # Build the app
       - name: build project
         run: | 
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
           make bin/app
         
+        # Clean the binaries
       - name: clean
         run: make clean
         
+        # Try build app in another compiler
       - name: make bin/app CXX=g++
         run: | 
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
