@@ -1,0 +1,34 @@
+name: Windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    env: 
+      VK_VERSION: "1.2.176.1"
+      INSTALL_LOCATION: "C:"
+      VULKAN_SDK: "C:\\VulkanSDK\\1.2.176.1"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache Vulkan SDK
+        id: cache-vulkan-sdk
+        uses: actions/cache@v1
+        with:
+         path: ${{ env.VULKAN_SDK }}
+         key: vulkan-sdk-${{ env.VK_VERSION }}
+      - name: Setup Vulkan
+        if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
+        run: |
+           Invoke-WebRequest -Uri "https://sdk.lunarg.com/sdk/download/${{ env.VULKAN_SDK }}/windows/VulkanSDK-${{ env.VULKAN_SDK }}-Installer.exe" -OutFile VulkanSDK.exe
+           $installer = Start-Process -FilePath VulkanSDK.exe -Wait -PassThru -ArgumentList @("/S");
+           $installer.WaitForExit();
+           dir ${{ env.INSTALL_LOCATION }}
+        shell: pws
