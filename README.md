@@ -45,6 +45,13 @@ $ make setup
 $ make
 ```
 
+#### Windows
+
+```shell
+> mingw32-make setup
+> mingw32-make
+```
+
 The first command will pull down the latest version of `glfw`, build it into a static library, and place it in our `lib` folder. This command also pulls in the relevant Vulkan libraries from the Vulkan install location (lucky we set those environment variables earlier!). Finally the last command compiles, runs, and finally cleans up the project. 
 
 *If a blank window pops up then congratulations! You've successfully finished building the project and can now start programming!*
@@ -66,7 +73,10 @@ $ make bin/app; make execute
 ```
 
 #### Windows 
-TBD
+```shell
+> mingw32-make bin/app && mingw32-make execute
+```
+
 
 Using this method can save you a huge amount of time compiling *(in reality, just a few seconds)* each time you make a small change to your code! If you want to know more about how it works, you should have a read through [the docs entry explaining the Makefile](docs/MakefileExplanation.md).
 
@@ -86,7 +96,9 @@ For working with some projects, you may want to pass arguments to the program on
 $ make ARGS="--somearg"
 ```
 #### Windows
-TBD
+```shell
+> mingw32-make ARGS="--somearg"
+```
 
 ### Specifying Custom Macro Definitions
 You may also want to pass in your own macro definitions for certain configurations (such as setting log levels). You can pass in your definitions using the `MACRO_DEFS` flag:
@@ -99,7 +111,9 @@ $ make MACRO_DEFS=MY_MACRO
 ```
 
 #### Windows
-TBD
+```shell
+> mingw32-make MACRO_DEFS=MY_MACRO
+```
 
 ### Specifying a Non-Default Compiler
 If you want to use a compiler for your platform that isn't the default for your system (or potentially you would like to explicitly state it), you can make use of the system-implicit `CXX` variable like so:
@@ -111,7 +125,9 @@ $ make CXX=g++
 ```
 
 #### Windows
-TBD
+```shell
+> mingw32-make CXX=g++
+```
 
 ## Contributing
 
