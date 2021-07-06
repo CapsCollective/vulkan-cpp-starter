@@ -24,7 +24,7 @@ jobs:
         id: cache-vulkan-sdk
         uses: actions/cache@v1
         with:
-          path: ~/VulkanSDK/${{ env.VK_VERSION }}
+          path: ${{ env.VULKAN_SDK }}
           key: vulkan-sdk-${{ env.VK_VERSION }}
 
       - name: Setup Vulkan 
@@ -43,3 +43,6 @@ jobs:
           ls ${{ env.VULKAN_SDK }}/vulkansdk-macos-1.2.135.0
           ls ${{ env.VULKAN_SDK }}/vulkansdk-macos-1.2.135.0/macOS
           ls $VULKAN_SDK/lib
+          
+      - name: setup dependencies
+        run: make setup
