@@ -37,7 +37,7 @@ jobs:
           tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
           echo "EXTRACTED"
           export VK_VERSION=1.2.135.0
-          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
           echo "EXPORTED"
           ls ${{ env.INSTALL_LOCATION }}
           ls ${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0
@@ -46,5 +46,5 @@ jobs:
           
       - name: setup dependencies
         run: | 
-          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
           make setup
