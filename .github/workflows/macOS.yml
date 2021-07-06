@@ -32,6 +32,7 @@ jobs:
         run: |
           curl -LS -o ../vulkansdk.tar.gz \
             https://sdk.lunarg.com/sdk/download/1.2.135.0/mac/vulkansdk-macos-1.2.135.0.tar.gz
-          tar xfz vulkansdk.tar.gz -C "${{ env.VULKAN_SDK }}"
+          tar xfz ../vulkansdk.tar.gz -C "${{ env.VULKAN_SDK }}"
+          ls ../
           cd ${{ env.VULKAN_SDK }}
           ls
