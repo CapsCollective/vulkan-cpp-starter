@@ -48,3 +48,12 @@ jobs:
         run: | 
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}vulkansdk-macos-1.2.135.0/macOS
           make setup
+
+      - name: build project
+        run: make bin/app
+        
+      - name: clean
+        run: make clean
+        
+      - name: make bin/app CXX=g++
+        run: make bin/app CXX=g++
