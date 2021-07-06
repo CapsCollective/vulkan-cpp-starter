@@ -31,4 +31,4 @@ jobs:
            $installer = Start-Process -FilePath VulkanSDK.exe -Wait -PassThru -ArgumentList @("/S");
            $installer.WaitForExit();
            dir ${{ env.INSTALL_LOCATION }}
-        shell: pws
+        shell: cmd
