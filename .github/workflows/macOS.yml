@@ -33,9 +33,12 @@ jobs:
           curl -LS -o ../vulkansdk.tar.gz \
             https://sdk.lunarg.com/sdk/download/1.2.135.0/mac/vulkansdk-macos-1.2.135.0.tar.gz
           mkdir -p "${{ env.VULKAN_SDK }}"
+          echo "CREATED"
           tar xfz ../vulkansdk.tar.gz -C "${{ env.VULKAN_SDK }}"
+          echo "EXTRACTED"
           export VK_VERSION=1.2.135.0
           export VULKAN_SDK=${{ env.VULKAN_SDK }}/1.2.135.0/macOS
+          echo "EXPORTED"
           ls ${{ env.VULKAN_SDK }}
           ls ${{ env.VULKAN_SDK }}/1.2.135.0
           ls ${{ env.VULKAN_SDK }}/1.2.135.0/macOS
