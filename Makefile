@@ -36,13 +36,17 @@ ifeq ($(OS),Windows_NT)
 else 
 	UNAMEOS := $(shell uname)
 	ifeq ($(UNAMEOS), Linux)
+		
+		LIB_EXT := so
 
 		platform := Linux
 		CXX ?= g++
 		linkFlags += -l vulkan.1 -l vulkan.$(VK_VERSION) -l GL -l m -l pthread -l dl -l rt -l X11
 	endif
 	ifeq ($(UNAMEOS), Darwin)
-
+		
+		LIB_EXT := dylib
+		
 		vulkanLibDir := lib
 		vulkanLibPrefix := $(vulkanLibDir)
 		vulkanLib := vulkan.1
@@ -57,7 +61,6 @@ else
 		linkFlags += $(vulkanLink) -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL
 	endif
 
-	LIB_EXT := dylib
 	CMAKE_CMD = cmake .
 
 	PATHSEP := /
