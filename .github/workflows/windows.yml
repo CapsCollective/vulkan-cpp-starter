@@ -22,7 +22,7 @@ jobs:
         id: cache-vulkan-sdk
         uses: actions/cache@v1
         with:
-         path: ${{ env.VULKAN_SDK }}
+         path: "C:\\VulkanSDK\\"
          key: vulkan-sdk-${{ env.VK_VERSION }}
       - name: Setup Vulkan
         if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
@@ -31,3 +31,6 @@ jobs:
            $installer = Start-Process -FilePath VulkanSDK.exe -Wait -PassThru -ArgumentList @("/S");
            $installer.WaitForExit();
            dir ${{ env.INSTALL_LOCATION }}
+     
+      - name: Setup dependencies
+        run: mingw32-make setup
