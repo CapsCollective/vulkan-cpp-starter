@@ -16,7 +16,6 @@ jobs:
     env: 
       VK_VERSION: "1.2.135"
       INSTALL_LOCATION: "$GITHUB_WORKSPACE/../vulkan_sdk"
-      VULKAN_SDK: "${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS"
 
     steps:
       - uses: actions/checkout@v2
@@ -42,10 +41,14 @@ jobs:
           make setup
 
       - name: build project
-        run: make bin/app
+        run: | 
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
+          make bin/app
         
       - name: clean
         run: make clean
         
       - name: make bin/app CXX=g++
-        run: make bin/app CXX=g++
+        run: | 
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
+          make bin/app CXX=g++
