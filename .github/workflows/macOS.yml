@@ -16,7 +16,7 @@ jobs:
     env: 
       VK_VERSION: "1.2.135"
       INSTALL_LOCATION: "$GITHUB_WORKSPACE/../vulkan_sdk"
-      VULKAN_SDK: "$INSTALL_LOCATION/vulkansdk-macos-1.2.135.0/macOS"
+      VULKAN_SDK: "${{env.INSTALL_LOCATION}}/vulkansdk-macos-1.2.135.0/macOS"
 
     steps:
       - uses: actions/checkout@v2
