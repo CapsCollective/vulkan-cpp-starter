@@ -14,7 +14,8 @@ jobs:
 
     runs-on: macos-latest
     env: 
-      VK_VERSION: "1.2.176.1"
+      VK_VERSION: "1.2.135.0"
+      VULKAN_SDK: "$GITHUB_WORKSPACE/../vulkan_sdk/"
 
     steps:
       - uses: actions/checkout@v2
@@ -29,13 +30,8 @@ jobs:
       - name: Setup Vulkan 
         if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
         run: |
-          curl -LS -o ../vulkansdk.dmg \
-            https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/mac/vulkansdk-macos-${{ env.VK_VERSION }}.dmg
-          ls ../
-          hdiutil attach ../vulkansdk.dmg
-          echo "VOLUME"
-          ls /Volumes
-          cd /Volumes/vulkansdk-macos-1.2.176.1
-          echo "VULKAN SDK LS"
+          curl -LS -o ../vulkansdk.tar.gz \
+            https://sdk.lunarg.com/sdk/download/1.2.135.0/mac/vulkansdk-macos-1.2.135.0.tar.gz
+          tar xfz vulkansdk.tar.gz -C "${{ env.VULKAN_SDK }}"
+          cd ${{ env.VULKAN_SDK }}
           ls
-          open ./InstallVulkan.app
