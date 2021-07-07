@@ -42,13 +42,13 @@ jobs:
           
         # Setup dependencies
       - name: setup dependencies
-        run: | 
+        run: |
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
           make setup
           
         # Build the app
       - name: build project
-        run: | 
+        run: |
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
           make bin/app
         
@@ -58,6 +58,6 @@ jobs:
         
         # Try build app in another compiler
       - name: make bin/app CXX=g++
-        run: | 
+        run: |
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/vulkansdk-macos-1.2.135.0/macOS
           make bin/app CXX=g++

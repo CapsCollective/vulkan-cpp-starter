@@ -1,12 +1,12 @@
-# Vulkan-cpp-starter
+# Vulkan C++ Starter
 
-Vulkan Cpp Starter kit is a simple starter project for the [Vulkan](https://www.vulkan.org/) graphics API. The project automatically pulls down and builds GLFW, whilst also pulling in required libraries from Vulkan. This template does not, however, automate the installation of Vulkan. 
+Vulkan C++ Starter kit is a simple starter project for the [Vulkan](https://www.vulkan.org/) graphics API. The project automatically pulls down and builds GLFW, whilst also pulling in required libraries from Vulkan. This template does not, however, automate the installation of Vulkan. 
 
 > Why not just use CMake?
 
 I guess we just don't want the added headache. CMake is complex and sometimes feels like some arcane magic that we generally take for granted in build systems. `Vulkan` and `glfw` are fairly standard libraries, and using CMake to link the two feels a little like overkill. The use of a `Makefile` also carried the added advantage of transparency - you know exactly what the compiler is doing, there's no magic involved in this process. 
 
-So that being said, we hope that this repository finds you well and wholeheartedly enjoying the simple things in life (i.e. video games programming).
+So that being said, we hope that this repository finds you well and wholeheartedly enjoying the simple things in life (i.e. graphics programming).
 
 
 ### Current Compatibility
@@ -86,7 +86,7 @@ $ make bin/app; make execute
 ```
 
 
-Using this method can save you a huge amount of time compiling *(in reality, just a few seconds)* each time you make a small change to your code! If you want to know more about how it works, you should have a read through [the docs entry explaining the Makefile](docs/MakefileExplanation.md).
+Using this method can save you a huge amount of time compiling *(in reality, just a few seconds)* each time you make a small change to your code! If you want to know more about how it works, you should have a read through [the docs entry explaining the Makefile](https://github.com/CapsCollective/raylib-cpp-starter) from another of our template projects.
 
 While separate compilation works quite well in most scenarios, it's not magic, and there are a few caveats to take note of here:
 
@@ -96,7 +96,7 @@ While separate compilation works quite well in most scenarios, it's not magic, a
 4. Placing includes in `.h` files instead of forward-declarations will also increase recursive includes and therefore the build time
 
 ### Passing Args to the Executable
-For working with some projects, you may want to pass arguments to the program once it's been built. This can be achieved by assigning values to the `ARGS` flag in the Makefile like below:
+For working with some projects, you may want to pass arguments to the program once it's been built. This can be achieved by assigning values to the `ARGS` flag in the `Makefile` like below:
 
 #### macOS & Linux
 
