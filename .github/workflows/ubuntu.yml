@@ -31,7 +31,7 @@ jobs:
         if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
         run: |
           curl -LS -o ../vulkansdk.tar.gz \
-            https://sdk.lunarg.com/sdk/download/1.2.135.0/mac/vulkansdk-macos-1.2.135.0.tar.gz
+            https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/linux/vulkansdk-linux-x86_64-{{ env.VK_VERSION }}.tar.gz
           mkdir -p "${{ env.INSTALL_LOCATION }}"
           tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
           ls ${{ env.INSTALL_LOCATION }}
