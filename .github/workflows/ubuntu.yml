@@ -34,4 +34,5 @@ jobs:
             https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/linux/vulkansdk-linux-x86_64-${{ env.VK_VERSION }}.tar.gz
           mkdir -p "${{ env.INSTALL_LOCATION }}"
           tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
-          ls ${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}
+          ls ${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/vulkansdk
+          ls ${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
