@@ -60,6 +60,8 @@ else
 		CXX ?= clang++
 		linkFlags += $(vulkanLink) -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL
 	endif
+	
+	vulkanLibDir := lib
 
 	CMAKE_CMD = cmake .
 
