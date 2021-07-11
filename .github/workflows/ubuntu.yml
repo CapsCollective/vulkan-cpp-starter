@@ -28,7 +28,7 @@ jobs:
       
       - name: Cache Vulkan
         id: cache-vulkan-sdk
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.INSTALL_LOCATION }}
           key: vulkan-sdk-${{ env.VK_VERSION }}
@@ -40,6 +40,10 @@ jobs:
             https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/linux/vulkansdk-linux-x86_64-${{ env.VK_VERSION }}.tar.gz
           mkdir -p "${{ env.INSTALL_LOCATION }}"
           tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
+      
+      - name: move SDK if cached
+        if: steps.cache-vulkan-sdk.outputs.cache-hit == 'true'
+        run: mv vulkan_sdk ../
       
       - name: setup dependencies
         run: |
