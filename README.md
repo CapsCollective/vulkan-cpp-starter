@@ -49,8 +49,7 @@ Before building the respository, you'll need the following:
         ```
         For more information about this syntax, please check the following [guide](https://www.shellhacks.com/windows-set-environment-variable-cmd-powershell/). Environment variables can also be set manually using Windows system properties. 
         
-        A guide on this process can be found [here](https://www.alphr.com/environment-variables-windows-10/). 
-    * **Linux:** TBD
+        A guide on this process can be found [here](https://www.alphr.com/environment-variables-windows-10/).
 
 ### Building the project
 Once you have cloned this repository and installed dependencies, building the project is as simple as running these two commands in its root directory:
