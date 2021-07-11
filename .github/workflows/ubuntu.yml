@@ -43,7 +43,7 @@ jobs:
       
       - name: setup dependencies
         run: |
-          ls ${{ env.INSTALL_LOCATION }}
+          ls
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
           make setup
           
