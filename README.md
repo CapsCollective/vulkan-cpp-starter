@@ -14,7 +14,7 @@ So that being said, we hope that this repository finds you well and wholehearted
 | ----------- | ---------------- | ------------------- | ---------------------------------------------------- |
 | **macOS**   | Clang++          | `Big Sur 11.4`    | [![macOS](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml)    |
 | **Linux**   | G++              | `Ubuntu-20.04.2.0`  | [![Ubuntu](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/ubuntu.yml)    |
-| **Windows** | MinGW (G++)      | `unknown`  | TBD |
+| **Windows** | MinGW (G++)      | `Windows 10 19041`  | [![Windows](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/windows.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/windows.yml) |
 
 ## Getting Started
 
@@ -23,12 +23,13 @@ So that being said, we hope that this repository finds you well and wholehearted
 Before building the respository, you'll need the following:
 
 1. [CMAKE](https://cmake.org/) - required for building `glfw`.
-2. Vulkan - the SDK can be downloaded from the [LunarG website](https://vulkan.lunarg.com/). 
+2. **WINDOWS ONLY**: This project relies primarily on Makefiles for compilation. Our tool of choice for compiling cpp on Windows is [Mingw64](http://mingw-w64.org/doku.php), since it's fully compatible with other operating system compilation methods. A comprehensive guide for installing Mingw64 can be found [here](https://www.youtube.com/watch?v=aXF4A5UeSeM). Once installed, you should be able to pull in your compiler of choice (we recommend gcc or clang).  
+3. Vulkan - the SDK can be downloaded from the [LunarG website](https://vulkan.lunarg.com/). 
     
-    2.1. Once the Vulkan SDK is installed, you'll want to make sure that the `VULKAN_SDK` environment variable is set on your system. Platform specific instructions can be found below:
+    3.1. Once the Vulkan SDK is installed, you'll want to make sure that both the `VULKAN_SDK` and `VK_VERSION` environment variables are set on your system. Platform specific instructions can be found below:
     
     *  **macOS & Linux:**
-        Both MacOS and Linux have a similar process for setting their environment variables. The only difference between the two is their SDK directory structure. The two directory structure have been included below:
+        Both MacOS and Linux have a similar process for setting their environment variables. The only difference between the two is their SDK directory structure. The two directory structures have been included below:
         ```bash
         # For macOS
         $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/macOS
@@ -40,7 +41,16 @@ Before building the respository, you'll need the following:
         $ export VK_VERSION=<VERSION>
         ```
         Remember to substitute `<VULKAN_INSTALL_DIR>` with the directory Vulkan was installed into, and `<VERSION>` with your Vulkan version, i.e: 1.2.176.1.
-    * **Windows:** TBD
+    * **Windows:** 
+        For Windows, the SDK should be automatically installed to your `C:` directory. To set these variables, you can set the following:
+        ```shell
+        > setx VULKAN_SDK = <VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>
+        > setx VK_VERSION = <VERSION>
+        ```
+        For more information about this syntax, please check the following [guide](https://www.shellhacks.com/windows-set-environment-variable-cmd-powershell/). Environment variables can also be set manually using Windows system properties. 
+        
+        A guide on this process can be found [here](https://www.alphr.com/environment-variables-windows-10/). 
+    * **Linux:** TBD
 
 ### Building the project
 Once you have cloned this repository and installed dependencies, building the project is as simple as running these two commands in its root directory:

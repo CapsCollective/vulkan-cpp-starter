@@ -1,0 +1,61 @@
+name: Windows
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    # Set env variables
+    env: 
+      VK_VERSION: "1.2.176.1"
+      INSTALL_LOCATION: "C:"
+      VULKAN_SDK: "C:\\VulkanSDK\\1.2.176.1"
+
+    steps:
+      - uses: actions/checkout@v2
+        
+        # Cache the vulkan SDK for re-use
+      - name: Cache Vulkan SDK
+        id: cache-vulkan-sdk
+        uses: actions/cache@v1
+        with:
+         path: "C:\\VulkanSDK\\"
+         key: vulkan-sdk-${{ env.VK_VERSION }}
+        
+        # Install Vulkan on the machine (automatically located at the C: directory)
+      - name: Setup Vulkan
+        if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
+        run: |
+           Invoke-WebRequest -Uri "https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/windows/VulkanSDK-${{ env.VK_VERSION }}-Installer.exe" -OutFile VulkanSDK.exe
+           $installer = Start-Process -FilePath VulkanSDK.exe -Wait -PassThru -ArgumentList @("/S");
+           $installer.WaitForExit();
+     
+        # Setup dependencies
+      - name: Setup dependencies
+        run: mingw32-make setup
+        
+        # Compile the project with dependencies
+      - name: Compile Project
+        run: mingw32-make bin/app
+      
+        # Export the binary as artifact
+      - name: Export binary
+        uses: actions/upload-artifact@v2
+        with:
+            name: app.exe
+            path: bin/app.exe
+
+        # Clean binaries
+      - name: Clean Project
+        run: mingw32-make clean
+
+        # Re-compile with other compiler
+      - name: make bin/app CXX=g++
+        run: mingw32-make bin/app CXX=g++
