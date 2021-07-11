@@ -12,7 +12,7 @@ So that being said, we hope that this repository finds you well and wholehearted
 ### Current Compatibility
 | OS          | Default Compiler |  Last Manual Build  |                   Compile Status                     |
 | ----------- | ---------------- | ------------------- | ---------------------------------------------------- |
-| **macOS**   | Clang++          | Big Sur 11.4    | [![macOS](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml)    |
+| **macOS**   | Clang++          | `Big Sur 11.4`    | [![macOS](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml)    |
 | **Linux**   | G++              | `unknown`  | TBD    |
 | **Windows** | MinGW (G++)      | `unknown`  | TBD |
 
