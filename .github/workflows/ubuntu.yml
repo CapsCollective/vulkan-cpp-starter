@@ -44,5 +44,22 @@ jobs:
       - name: setup dependencies
         run: |
           export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
-          ls $VULKAN_SDK/lib
           make setup
+          
+      - name: make bin/app
+        run: make bin/app
+        
+      - name: 'export binary'
+        uses: actions/upload-artifact@v2
+        with:
+            name: app
+            path: bin/app
+            
+      - name: make clean
+        run: make clean
+      
+      - name: make bin/app CXX=g++
+        run: make bin/app CXX=g++
+        
+      - name: make clean
+        run: make clean
