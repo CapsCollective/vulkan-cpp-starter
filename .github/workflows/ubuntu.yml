@@ -47,7 +47,9 @@ jobs:
           make setup
           
       - name: make bin/app
-        run: make bin/app
+        run: | 
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
+          make bin/app
         
       - name: 'export binary'
         uses: actions/upload-artifact@v2
@@ -59,7 +61,9 @@ jobs:
         run: make clean
       
       - name: make bin/app CXX=g++
-        run: make bin/app CXX=g++
+        run: | 
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
+          make bin/app CXX=g++
         
       - name: make clean
         run: make clean
