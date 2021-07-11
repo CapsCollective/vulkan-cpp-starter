@@ -18,7 +18,7 @@ endif
 
 ifeq ($(OS),Windows_NT)
 
-	LIB_EXT = lib
+	LIB_EXT = .lib
 	CMAKE_CMD = cmake -G "MinGW Makefiles" .
 
 	vulkanLibDir := Lib
@@ -37,24 +37,28 @@ else
 	UNAMEOS := $(shell uname)
 	ifeq ($(UNAMEOS), Linux)
 		
-		LIB_EXT := so
+		LIB_EXT :=
+		
+		vulkanLib := vulkan.so
+		vulkanLink := -lvulkan
+
+		vulkanExports := export VK_LAYER_PATH=$(VULKAN_SDK)/etc/explicit_layer.d
 
 		platform := Linux
 		CXX ?= g++
-		linkFlags += -l vulkan.1 -l vulkan.$(VK_VERSION) -l GL -l m -l pthread -l dl -l rt -l X11
+		linkFlags += $(vulkanLink) -ldl -lpthread -lX11 -lXxf86vm -lXrandr -lXi
 	endif
 	ifeq ($(UNAMEOS), Darwin)
 		
-		LIB_EXT := dylib
+		LIB_EXT := .dylib
 		
-		vulkanLibDir := lib
-		vulkanLibPrefix := $(vulkanLibDir)
 		vulkanLib := vulkan.1
-		vulkanLink := -l $(vulkanLib) -l vulkan.$(VK_VERSION)
+		vulkanLibVersion := $(patsubst %.0,%,$(VK_VERSION))
+		vulkanLink := -l $(vulkanLib) -l vulkan.$(vulkanLibVersion)
 
 		vulkanExports := export export VK_ICD_FILENAMES=$(VULKAN_SDK)/share/vulkan/icd.d/MoltenVK_icd.json; \ 
 						export VK_LAYER_PATH=$(VULKAN_SDK)/share/vulkan/explicit_layer.d
-		macOSVulkanLib = $(call COPY, $(VULKAN_SDK)/lib, lib/$(platform),libvulkan.$(VK_VERSION).$(LIB_EXT))
+		macOSVulkanLib = $(call COPY, $(VULKAN_SDK)/lib, lib/$(platform),libvulkan.$(vulkanLibVersion)$(LIB_EXT))
 
 		platform := macOS
 		CXX ?= clang++
@@ -63,6 +67,8 @@ else
 	
 	vulkanLibDir := lib
 
+	vulkanLibDir := lib
+	vulkanLibPrefix := $(vulkanLibDir)
 	CMAKE_CMD = cmake .
 
 	PATHSEP := /
@@ -86,7 +92,7 @@ lib:
 	cd vendor/glfw $(THEN) $(CMAKE_CMD) $(THEN) "$(MAKE)" 
 	$(MKDIR) $(call platformpth, lib/$(platform))
 	$(call COPY,vendor/glfw/src,lib/$(platform),libglfw3.a)
-	$(call COPY,$(VULKAN_SDK)/$(vulkanLibDir),lib/$(platform),$(vulkanLibPrefix)$(vulkanLib).$(LIB_EXT))
+	$(call COPY,$(VULKAN_SDK)/$(vulkanLibDir),lib/$(platform),$(vulkanLibPrefix)$(vulkanLib)$(LIB_EXT))
 	$(macOSVulkanLib)
 
 # Link the program and create the executable
