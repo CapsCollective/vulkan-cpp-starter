@@ -13,7 +13,7 @@ So that being said, we hope that this repository finds you well and wholehearted
 | OS          | Default Compiler |  Last Manual Build  |                   Compile Status                     |
 | ----------- | ---------------- | ------------------- | ---------------------------------------------------- |
 | **macOS**   | Clang++          | `Big Sur 11.4`    | [![macOS](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml)    |
-| **Linux**   | G++              | `Ubuntu 20.04 LTS`  | TBD    |
+| **Linux**   | G++              | `unknown`  | TBD    |
 | **Windows** | MinGW (G++)      | `Windows 10 19041`  | [![Windows](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/windows.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/windows.yml) |
 
 ## Getting Started
