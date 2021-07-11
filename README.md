@@ -13,7 +13,7 @@ So that being said, we hope that this repository finds you well and wholehearted
 | OS          | Default Compiler |  Last Manual Build  |                   Compile Status                     |
 | ----------- | ---------------- | ------------------- | ---------------------------------------------------- |
 | **macOS**   | Clang++          | `unknown`    | [![macOS](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml)    |
-| **Linux**   | G++              | `unknown`  | TBD    |
+| **Linux**   | G++              | `Ubuntu-20.04.2.0`  | [![Ubuntu](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/ubuntu.yml)    |
 | **Windows** | MinGW (G++)      | `unknown`  | TBD |
 
 ## Getting Started
@@ -27,14 +27,20 @@ Before building the respository, you'll need the following:
     
     2.1. Once the Vulkan SDK is installed, you'll want to make sure that the `VULKAN_SDK` environment variable is set on your system. Platform specific instructions can be found below:
     
-    *  **MacOS:**
+    *  **macOS & Linux:**
+        Both MacOS and Linux have a similar process for setting their environment variables. The only difference between the two is their SDK directory structure. The two directory structure have been included below:
         ```bash
-        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR/VulkanSDK/<VERSION>/macOS>
+        # For macOS
+        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/macOS
+        
+        # for Linux
+        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/x86_64
+        
+        # for both
         $ export VK_VERSION=<VERSION>
         ```
-        Remember to substitute `<VULKAN_INSTALL_DIR>` with the directory Vulkan was installed into, and `<VERSION` with your Vulkan version, i.e: 1.2.176.1.
+        Remember to substitute `<VULKAN_INSTALL_DIR>` with the directory Vulkan was installed into, and `<VERSION>` with your Vulkan version, i.e: 1.2.176.1.
     * **Windows:** TBD
-    * **Linux:** TBD
 
 ### Building the project
 Once you have cloned this repository and installed dependencies, building the project is as simple as running these two commands in its root directory:
