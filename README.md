@@ -41,7 +41,9 @@ Before building the respository, you'll need the following:
         > setx VULKAN_SDK = <VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>
         > setx VK_VERSION = <VERSION>
         ```
-        for more information about this syntax, please check the following [guide](https://www.shellhacks.com/windows-set-environment-variable-cmd-powershell/).
+        For more information about this syntax, please check the following [guide](https://www.shellhacks.com/windows-set-environment-variable-cmd-powershell/). Environment variables can also be set manually using Windows system properties. 
+        
+        A guide on this process can be found [here](https://www.alphr.com/environment-variables-windows-10/). 
     * **Linux:** TBD
 
 ### Building the project
