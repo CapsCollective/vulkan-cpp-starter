@@ -1,0 +1,73 @@
+name: Ubuntu
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    env: 
+      VK_VERSION: "1.2.176.1"
+      INSTALL_LOCATION: "$GITHUB_WORKSPACE/../vulkan_sdk"
+
+    steps:
+
+      - uses: actions/checkout@v2
+      
+      - name: update apt 
+        run: sudo apt-get update
+        
+      - name: install glfw dependencies
+        run: sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
+      
+      - name: Cache Vulkan
+        id: cache-vulkan-sdk
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.INSTALL_LOCATION }}
+          key: vulkan-sdk-${{ env.VK_VERSION }}
+      
+      - name: Setup Vulkan 
+        if: steps.cache-vulkan-sdk.outputs.cache-hit != 'true'
+        run: |
+          curl -LS -o ../vulkansdk.tar.gz \
+            https://sdk.lunarg.com/sdk/download/${{ env.VK_VERSION }}/linux/vulkansdk-linux-x86_64-${{ env.VK_VERSION }}.tar.gz
+          mkdir -p "${{ env.INSTALL_LOCATION }}"
+          tar xfz ../vulkansdk.tar.gz -C "${{ env.INSTALL_LOCATION }}"
+      
+      - name: move SDK if cached
+        if: steps.cache-vulkan-sdk.outputs.cache-hit == 'true'
+        run: mv vulkan_sdk ../
+      
+      - name: setup dependencies
+        run: |
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
+          make setup
+          
+      - name: make bin/app
+        run: | 
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
+          make bin/app
+        
+      - name: 'export binary'
+        uses: actions/upload-artifact@v2
+        with:
+            name: app
+            path: bin/app
+            
+      - name: make clean
+        run: make clean
+      
+      - name: make bin/app CXX=g++
+        run: | 
+          export VULKAN_SDK=${{ env.INSTALL_LOCATION }}/${{ env.VK_VERSION }}/x86_64
+          make bin/app CXX=g++
+        
+      - name: make clean
+        run: make clean

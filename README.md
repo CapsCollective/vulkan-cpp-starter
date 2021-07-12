@@ -13,7 +13,7 @@ So that being said, we hope that this repository finds you well and wholehearted
 | OS          | Default Compiler |  Last Manual Build  |                   Compile Status                     |
 | ----------- | ---------------- | ------------------- | ---------------------------------------------------- |
 | **macOS**   | Clang++          | `Big Sur 11.4`    | [![macOS](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/macOS.yml)    |
-| **Linux**   | G++              | `unknown`  | TBD    |
+| **Linux**   | G++              | `Ubuntu-20.04.2.0`  | [![Ubuntu](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/ubuntu.yml)    |
 | **Windows** | MinGW (G++)      | `Windows 10 19041`  | [![Windows](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/windows.yml/badge.svg)](https://github.com/CapsCollective/vulkan-cpp-starter/actions/workflows/windows.yml) |
 
 ## Getting Started
@@ -28,13 +28,19 @@ Before building the respository, you'll need the following:
     
     3.1. Once the Vulkan SDK is installed, you'll want to make sure that both the `VULKAN_SDK` and `VK_VERSION` environment variables are set on your system. Platform specific instructions can be found below:
     
-    *  **MacOS:**
-        On OSX, the SDK should be installed to your home directory by default (unless otherwise specified)
+    *  **macOS & Linux:**
+        Both MacOS and Linux have a similar process for setting their environment variables. The only difference between the two is their SDK directory structure. The two directory structures have been included below:
         ```bash
-        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR/VulkanSDK/<VERSION>/macOS>
+        # For macOS
+        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/macOS
+        
+        # for Linux
+        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/x86_64
+        
+        # for both
         $ export VK_VERSION=<VERSION>
         ```
-        Remember to substitute `<VULKAN_INSTALL_DIR>` with the directory Vulkan was installed into, and `<VERSION` with your Vulkan version, i.e: 1.2.176.1.
+        Remember to substitute `<VULKAN_INSTALL_DIR>` with the directory Vulkan was installed into, and `<VERSION>` with your Vulkan version, i.e: 1.2.176.1.
     * **Windows:** 
         For Windows, the SDK should be automatically installed to your `C:` directory. To set these variables, you can set the following:
         ```shell
@@ -43,8 +49,7 @@ Before building the respository, you'll need the following:
         ```
         For more information about this syntax, please check the following [guide](https://www.shellhacks.com/windows-set-environment-variable-cmd-powershell/). Environment variables can also be set manually using Windows system properties. 
         
-        A guide on this process can be found [here](https://www.alphr.com/environment-variables-windows-10/). 
-    * **Linux:** TBD
+        A guide on this process can be found [here](https://www.alphr.com/environment-variables-windows-10/).
 
 ### Building the project
 Once you have cloned this repository and installed dependencies, building the project is as simple as running these two commands in its root directory:
