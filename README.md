@@ -32,7 +32,10 @@ Before building the respository, you'll need the following:
         Both MacOS and Linux have a similar process for setting their environment variables. The only difference between the two is their SDK directory structure. The two directory structures have been included below:
         ```bash
         # For macOS
-        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/macOS
+        $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/macOS\
+        # MACOS ONLY MACRO REQUIREMENTS
+        $ export VK_ICD_FILENAMES=$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json
+        $ export VK_LAYER_PATH=$VULKAN_SDK/share/vulkan/explicit_layer.d
         
         # for Linux
         $ export VULKAN_SDK=<VULKAN_INSTALL_DIR>/VulkanSDK/<VERSION>/x86_64
