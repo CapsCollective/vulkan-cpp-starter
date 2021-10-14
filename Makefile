@@ -12,10 +12,6 @@ includes := -I vendor/glfw/include -I $(VULKAN_SDK)/include
 linkFlags = -L lib/$(platform) -lglfw3
 compileFlags := -std=c++17 $(includes)
 
-ifdef MACRO_DEFS
-    macroDefines := -D $(MACRO_DEFS)
-endif
-
 ifeq ($(OS),Windows_NT)
 
 	LIB_EXT = .lib
@@ -105,7 +101,7 @@ $(target): $(objects)
 # Compile objects to the build directory
 $(buildDir)/%.o: src/%.cpp Makefile
 	$(MKDIR) $(call platformpth, $(@D))
-	$(CXX) -MMD -MP -c $(compileFlags) $< -o $@ $(macroDefines)
+	$(CXX) -MMD -MP -c $(compileFlags) $< -o $@ $(CXXFLAGS)
 
 clear: 
 	clear;
