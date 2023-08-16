@@ -80,7 +80,7 @@ endif
 all: $(target) execute clean
 
 submodules:
-	git submodule update --init --recursive
+	git submodule update --init --recursive --depth 1
 
 setup: submodules lib
 
